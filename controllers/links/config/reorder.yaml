@@ -1,0 +1,17 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+# Reorder Title
+title: Reorder Links
+
+# Attribute name
+nameFrom: name
+
+# Model Class name
+modelClass: DamianLewis\SocialMedia\Models\Link
+
+# Toolbar widget configuration
+toolbar:
+  # Partial for toolbar buttons
+  buttons: partials/reorder_toolbar

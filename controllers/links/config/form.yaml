@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Link
+
+# Model Form Field configuration
+form: $/damianlewis/socialmedia/models/link/fields.yaml
+
+# Model Class name
+modelClass: DamianLewis\SocialMedia\Models\Link
+
+# Default redirect location
+defaultRedirect: damianlewis/socialmedia/links
+
+# Create page
+create:
+    title: Create Link
+    redirect: damianlewis/socialmedia/links/update/:id
+    redirectClose: damianlewis/socialmedia/links
+
+# Update page
+update:
+    title: Edit Link
+    redirect: damianlewis/socialmedia/links
+    redirectClose: damianlewis/socialmedia/links
+
+# Preview page
+preview:
+    title: Preview Link

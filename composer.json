@@ -1,0 +1,19 @@
+{
+    "name": "damianlewis/oc-socialmedia-plugin",
+    "description": "A list of social media links associated with a website.",
+    "type": "october-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Damian Lewis",
+            "email": "damian@damianlewis.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "composer/installers": "~1.0",
+        "october/system": "^1.0",
+        "october/cms": "^1.0",
+        "october/backend": "^1.0"
+    }
+}

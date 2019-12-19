@@ -1,0 +1,40 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    is_active:
+        label: Active
+        type: active
+        width: 1%
+
+    name:
+        label: Name
+        type: text
+        searchable: true
+
+    url:
+        label: URL
+        type: text
+        searchable: true
+
+    icon:
+        label: Icon
+        type: previewimage
+        width: 1%
+        sortable: false
+
+    sort_order:
+        label: Order
+        type: number
+        invisible: true
+
+    created_at:
+        label: Created at
+        type: datetime
+        invisible: true
+
+    updated_at:
+        label: Updated at
+        type: datetime
+        invisible: true

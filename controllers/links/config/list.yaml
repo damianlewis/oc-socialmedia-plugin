@@ -1,0 +1,41 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/damianlewis/socialmedia/models/link/columns.yaml
+
+# Model Class name
+modelClass: DamianLewis\SocialMedia\Models\Link
+
+# List Title
+title: Manage Links
+
+# Link URL for each record
+recordUrl: damianlewis/socialmedia/links/update/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# Displays the list column set up button
+showSetup: true
+
+# Default sorting column
+defaultSort:
+    column: sort_order
+    direction: asc
+
+# Display checkboxes next to each record
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: partials/list_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

@@ -1,0 +1,40 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Name
+        span: auto
+
+tabs:
+    fields:
+        url:
+            tab: Details
+            label: URL
+            span: auto
+
+        icon:
+            tab: Details
+            label: icon
+            span: auto
+            type: fileupload
+            mode: image
+            fileTypes: svg,png
+            comment: Social media logo.
+
+secondaryTabs:
+    fields:
+        manage_section:
+            label: Manage
+            type: section
+
+        is_blank_target:
+            label: Blank target
+            type: switch
+            comment: When enabled the link will open in a blank target.
+
+        is_active:
+            label: Active
+            type: switch
+            comment: When disabled the link isn't shown in front-end.

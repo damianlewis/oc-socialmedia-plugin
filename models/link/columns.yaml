@@ -5,7 +5,8 @@
 columns:
     is_active:
         label: Active
-        type: active
+        type: partial
+        path: $/damianlewis/socialmedia/controllers/links/partials/_active_column.htm
         width: 1%
 
     name:
@@ -20,7 +21,8 @@ columns:
 
     icon:
         label: Icon
-        type: previewimage
+        type: partial
+        path: $/damianlewis/socialmedia/controllers/links/partials/_icon_column.htm
         width: 1%
         sortable: false
 

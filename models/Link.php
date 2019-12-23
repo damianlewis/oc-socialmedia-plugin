@@ -30,7 +30,7 @@ class Link extends Model
 
     protected $casts = [
         'is_blank_target' => 'boolean',
-        'is_active' => 'boolean'
+        'is_visible' => 'boolean'
     ];
 
     protected $nullable = [
@@ -40,13 +40,13 @@ class Link extends Model
     ];
 
     /**
-     * Select only the active links.
+     * Select only the visible links.
      *
      * @param  Builder  $query
      * @return Builder
      */
-    public function scopeActive(Builder $query): Builder
+    public function scopeVisible(Builder $query): Builder
     {
-        return $query->where('is_active', true);
+        return $query->where('is_visible', true);
     }
 }

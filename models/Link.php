@@ -17,6 +17,28 @@ class Link extends Model
     use Sortable;
     use Validation;
 
+    /**
+     * The attributes on which the links can be ordered.
+     *
+     * @var array
+     */
+    public static $orderByOptions = [
+        'sort_order' => 'Sort order',
+        'created_at' => 'Created date',
+        'updated_at' => 'Updated date',
+        'name' => 'Name'
+    ];
+
+    /**
+     * The direction the links can be ordered.
+     *
+     * @var array
+     */
+    public static $orderDirectionOptions = [
+        'asc' => 'Ascending',
+        'desc' => 'Descending'
+    ];
+
     public $table = 'damianlewis_socialmedia_links';
 
     public $rules = [
@@ -30,7 +52,7 @@ class Link extends Model
 
     protected $casts = [
         'is_blank_target' => 'boolean',
-        'is_active' => 'boolean'
+        'is_visible' => 'boolean'
     ];
 
     protected $nullable = [
@@ -40,13 +62,41 @@ class Link extends Model
     ];
 
     /**
-     * Select only the active links.
+     * Select only the visible links.
      *
      * @param  Builder  $query
      * @return Builder
      */
-    public function scopeActive(Builder $query): Builder
+    public function scopeVisible(Builder $query): Builder
     {
-        return $query->where('is_active', true);
+        return $query->where('is_visible', true);
+    }
+
+    /**
+     * Returns an ordered collection of links for the frontend.
+     *
+     * @param  Builder  $query
+     * @param  array  $options
+     * @return Builder
+     */
+    public function scopeFrontEndCollection(Builder $query, array $options = []): Builder
+    {
+        /**
+         * @var string $orderBy
+         * @var string $orderDirection
+         */
+        extract(array_merge([
+            'orderBy' => 'sort_order',
+            'orderDirection' => 'asc'
+        ], $options));
+
+        $sortOrderByValid = in_array($orderBy, array_keys(self::$orderByOptions));
+        $sortOrderDirectionValid = in_array($orderDirection, array_keys(self::$orderDirectionOptions));
+
+        return $query
+            ->visible()
+            ->when($sortOrderByValid && $sortOrderDirectionValid, function ($query) use ($orderBy, $orderDirection) {
+                return $query->orderBy($orderBy, $orderDirection);
+            });
     }
 }

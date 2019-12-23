@@ -34,7 +34,7 @@ secondaryTabs:
             type: switch
             comment: When enabled the link will open in a blank target.
 
-        is_active:
-            label: Active
+        is_visible:
+            label: Visible
             type: switch
-            comment: When disabled the link isn't shown in front-end.
+            comment: When disabled the category is hidden on the frontend.

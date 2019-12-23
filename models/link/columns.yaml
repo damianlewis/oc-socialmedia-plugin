@@ -3,10 +3,10 @@
 # ===================================
 
 columns:
-    is_active:
-        label: Active
+    is_visible:
+        label: Visible
         type: partial
-        path: $/damianlewis/socialmedia/controllers/links/partials/_active_column.htm
+        path: $/damianlewis/socialmedia/controllers/links/partials/_visible_column.htm
         width: 1%
 
     name:

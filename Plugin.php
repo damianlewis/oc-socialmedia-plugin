@@ -23,7 +23,7 @@ class Plugin extends PluginBase
     public function registerComponents(): array
     {
         return [
-            Links::class => 'socialMediaLinks'
+            Links::class => 'links'
         ];
     }
 

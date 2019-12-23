@@ -42,31 +42,6 @@ class Links extends ComponentBase
     }
 
     /**
-     * Returns an array of order by options.
-     *
-     * @return array
-     */
-    public function getOrderByOptions(): array
-    {
-        return Link::$orderByOptions;
-    }
-
-    /**
-     * Returns an array of order direction options.
-     *
-     * @return array
-     */
-    public function getOrderDirectionOptions(): array
-    {
-        return Link::$orderDirectionOptions;
-    }
-
-    public function onRun(): void
-    {
-        $this->links = $this->getLinks();
-    }
-
-    /**
      * Returns an array of transformed links for consumption by the frontend.
      *
      * @return array The transformed collection.
@@ -98,19 +73,29 @@ class Links extends ComponentBase
         return false;
     }
 
-    /**
-     * Returns an ordered collection of links.
-     *
-     * @return Collection
-     */
-    protected function getLinks(): Collection
+    public function onRun(): void
     {
-        $options = [
-            'orderBy' => $this->property('orderBy'),
-            'orderDirection' => $this->property('orderDirection')
-        ];
+        $this->links = $this->getLinks();
+    }
 
-        return Link::frontEndCollection($options)->get();
+    /**
+     * Returns an array of order by options.
+     *
+     * @return array
+     */
+    public function getOrderByOptions(): array
+    {
+        return Link::$orderByOptions;
+    }
+
+    /**
+     * Returns an array of order direction options.
+     *
+     * @return array
+     */
+    public function getOrderDirectionOptions(): array
+    {
+        return Link::$orderDirectionOptions;
     }
 
     /**
@@ -145,5 +130,20 @@ class Links extends ComponentBase
                 'useBlankTarget' => $link->is_blank_target
             ]);
         };
+    }
+
+    /**
+     * Returns an ordered collection of links.
+     *
+     * @return Collection
+     */
+    protected function getLinks(): Collection
+    {
+        $options = [
+            'orderBy' => $this->property('orderBy'),
+            'orderDirection' => $this->property('orderDirection')
+        ];
+
+        return Link::frontEndCollection($options)->get();
     }
 }

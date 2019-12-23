@@ -39,15 +39,12 @@ class Links extends Controller
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function listInjectRowClass(Model $record): string
     {
         if (!$record instanceof Link) {
             return '';
         }
 
-        return $record->is_active ? '' : 'safe disabled';
+        return $record->is_visible ? '' : 'safe disabled';
     }
 }

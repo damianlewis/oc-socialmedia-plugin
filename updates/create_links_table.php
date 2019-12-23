@@ -17,9 +17,9 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('url')->nullable();
-            $table->boolean('is_blank_target')->default(false);
-            $table->boolean('is_active')->default(false);
             $table->unsignedSmallInteger('sort_order')->nullable();
+            $table->boolean('is_blank_target')->default(false);
+            $table->boolean('is_visible')->default(false);
             $table->timestamps();
         });
     }

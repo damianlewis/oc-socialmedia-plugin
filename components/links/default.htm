@@ -1,15 +1,17 @@
-<div>
-    {% for link in __SELF__.linkList %}
-        <a href="{{ link.url }}"
-           {% if link.is_blank_target %}target="_blank"{% endif %}
-        >
-            {% if link.image %}
-                <img src="{{ link.icon.getPath() }}"
-                     {% if link.icon.title %}alt="{{ link.icon.title }}"{% endif %}
-                >
-            {% else %}
-                {{ list.name }}
-            {% endif %}
-        </a>
-    {% endfor %}
-</div>
+{% if __SELF__.isAvailable %}
+    <div>
+        {% for link in __SELF__.collection %}
+            <a href="{{ link.url }}"
+               {% if link.useBlankTarget %}target="_blank"{% endif %}
+            >
+                {% if link.icon %}
+                    <img src="{{ link.icon.getPath() }}"
+                         {% if link.icon.title %}alt="{{ link.icon.title }}"{% endif %}
+                    >
+                {% else %}
+                    {{ list.name }}
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

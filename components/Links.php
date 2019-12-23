@@ -11,6 +11,11 @@ use October\Rain\Database\Collection;
 
 class Links extends ComponentBase
 {
+    /**
+     * @var Collection
+     */
+    private $links;
+
     public function componentDetails(): array
     {
         return [
@@ -26,38 +31,63 @@ class Links extends ComponentBase
                 'title' => 'Order by',
                 'description' => 'The attribute to order the links by.',
                 'type' => 'dropdown',
-                'options' => [
-                    'sort_order' => 'Sort Order',
-                    'created_at' => 'Created Date',
-                    'updated_at' => 'Updated Date',
-                    'name' => 'Name'
-                ],
                 'default' => 'sort_order'
             ],
             'orderDirection' => [
                 'title' => 'Order direction',
                 'type' => 'dropdown',
-                'options' => [
-                    'asc' => 'Ascending',
-                    'desc' => 'Descending'
-                ],
                 'default' => 'asc'
-            ],
-            'active' => [
-                'title' => 'Active',
-                'description' => 'Only display active links.',
-                'type' => 'checkbox',
-                'default' => true
             ]
         ];
     }
 
+    /**
+     * Returns an array of order by options.
+     *
+     * @return array
+     */
+    public function getOrderByOptions(): array
+    {
+        return Link::$orderByOptions;
+    }
+
+    /**
+     * Returns an array of order direction options.
+     *
+     * @return array
+     */
+    public function getOrderDirectionOptions(): array
+    {
+        return Link::$orderDirectionOptions;
+    }
+
     public function onRun(): void
     {
-        $this->page['linkList'] = array_map(
-            $this->transformLinks(['name', 'url', 'icon', 'is_blank_target']),
-            $this->getLinks()->all()
-        );
+        $this->links = $this->getLinks();
+    }
+
+    /**
+     * Returns an array of transformed links for consumption by the frontend.
+     *
+     * @return array The transformed collection.
+     */
+    public function collection(): array
+    {
+        if (!$this->isAvailable()) {
+            return [];
+        }
+
+        return $this->transformCollection($this->links);
+    }
+
+    /**
+     * Returns true if a links collection has been set for the component.
+     *
+     * @return bool
+     */
+    public function isAvailable(): bool
+    {
+        return !!$this->links;
     }
 
     /**
@@ -67,24 +97,45 @@ class Links extends ComponentBase
      */
     protected function getLinks(): Collection
     {
-        return Link::query()
-            ->when($this->property('active'), function ($query) {
-                return $query->active();
-            })
-            ->orderBy($this->property('orderBy'), $this->property('orderDirection'))
-            ->get();
+        $options = [
+            'orderBy' => $this->property('orderBy'),
+            'orderDirection' => $this->property('orderDirection')
+        ];
+
+        return Link::frontEndCollection($options)->get();
     }
 
     /**
-     * Returns only the link data required by the frontend.
+     * Transforms a links collection into the data required by the frontend.
      *
-     * @param  array  $data  An array of model attributes and relations.
+     * @param  Collection  $links
+     * @return array
+     */
+    protected function transformCollection(Collection $links): array
+    {
+        return array_map(
+            $this->transformItem(),
+            $links->all()
+        );
+    }
+
+    /**
+     * Transforms a link model into the data required by the frontend.
+     *
      * @return Closure
      */
-    protected function transformLinks(array $data): Closure
+    protected function transformItem(): Closure
     {
-        return function (Link $link) use ($data) {
-            return $link->only($data);
+        return function (Link $link) {
+            $data = $link->only([
+                'name',
+                'url',
+                'icon'
+            ]);
+
+            return array_merge($data, [
+                'useBlankTarget' => $link->is_blank_target
+            ]);
         };
     }
 }

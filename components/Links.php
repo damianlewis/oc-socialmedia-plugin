@@ -81,13 +81,21 @@ class Links extends ComponentBase
     }
 
     /**
-     * Returns true if a links collection has been set for the component.
+     * Returns true if a collection of links has been fetched from the database.
      *
      * @return bool
      */
     public function isAvailable(): bool
     {
-        return !!$this->links;
+        if ($this->links === null) {
+            return false;
+        }
+
+        if ($this->links->count() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

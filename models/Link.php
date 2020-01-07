@@ -39,8 +39,6 @@ class Link extends Model
         'desc' => 'Descending'
     ];
 
-    public $table = 'damianlewis_socialmedia_links';
-
     public $rules = [
         'name' => 'required',
         'url' => 'url'
@@ -49,6 +47,8 @@ class Link extends Model
     public $attachOne = [
         'icon' => File::class
     ];
+
+    protected $table = 'damianlewis_socialmedia_links';
 
     protected $casts = [
         'is_blank_target' => 'boolean',

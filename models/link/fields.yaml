@@ -37,4 +37,4 @@ secondaryTabs:
         is_visible:
             label: Visible
             type: switch
-            comment: When disabled the category is hidden on the frontend.
+            comment: When disabled the link is hidden on the frontend.

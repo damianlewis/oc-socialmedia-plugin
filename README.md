@@ -6,4 +6,8 @@ Add, edit and delete the social media links via the backend settings page.
 
 ## Component
 Add the Links component `{% component 'socialMediaLinks' %}` to your CMS page. The component injects the following variables into the page where it's used:
-- `linkList` - An array of links with `name`, `url`, `icon` and `is_blank_target` values.
+- `links` - An array of links with the following properties:
+    - `name` - String
+    - `url` - String
+    - `icon` - Array with `path` and `title` values
+    - `useBlankTarget`- Boolean

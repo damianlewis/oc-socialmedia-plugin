@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace DamianLewis\SocialMedia;
 
+use App;
 use Backend;
+use DamianLewis\SocialMedia\Classes\Providers\TransformerServiceProvider;
 use DamianLewis\SocialMedia\Components\Links;
 use System\Classes\PluginBase;
+use System\Classes\SettingsManager;
 
 class Plugin extends PluginBase
 {
@@ -20,10 +23,15 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function boot()
+    {
+        App::register(TransformerServiceProvider::class);
+    }
+
     public function registerComponents(): array
     {
         return [
-            Links::class => 'links'
+            Links::class => 'socialMediaLinks'
         ];
     }
 
@@ -45,8 +53,8 @@ class Plugin extends PluginBase
                 'description' => 'Manage the social media links.',
                 'icon' => 'icon-link',
                 'url' => Backend::url('damianlewis/socialmedia/links'),
-                'permissions' => ['damianlewis.socialmedia.access_links'],
-                'order' => 999
+                'category' => SettingsManager::CATEGORY_MYSETTINGS,
+                'permissions' => ['damianlewis.socialmedia.access_links']
             ]
         ];
     }

@@ -9,12 +9,19 @@
             "email": "damian@damianlewis.co.uk"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/damianlewis/oc-transformer-plugin"
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "composer/installers": "~1.0",
         "october/system": "^1.0",
         "october/cms": "^1.0",
         "october/backend": "^1.0",
-        "laravel/framework": "5.5.*"
+        "laravel/framework": "5.5.*",
+        "damianlewis/oc-transformer-plugin": "^1.2"
     }
 }
